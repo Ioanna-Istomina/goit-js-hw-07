@@ -3,6 +3,7 @@ import { galleryItems } from "./gallery-items.js";
 
 const gallery = document.querySelector(".gallery");
 const galleryMarkup = createGalleryMarkup(galleryItems);
+let instance = "";
 
 //Додавання розмітки до HTML
 gallery.insertAdjacentHTML("beforeend", galleryMarkup);
@@ -37,4 +38,27 @@ function onGalleryItemClick(ev) {
   //Отримує URL великої картинки
   const url = ev.target.dataset.source;
   const alt = ev.target.alt;
+
+  onOpenModal(url, alt);
+}
+
+function onOpenModal(url, alt) {
+  //  Створення розмітки модалки
+  instance = basicLightbox.create(`
+	<img
+          src="${url}"
+          alt="${alt}"
+        />
+`);
+  instance.show();
+
+  //Додає подію натискання клавіш
+  window.addEventListener("keydown", onEscKeyPress);
+}
+//   Закриття модалки при натисканні ESC
+function onEscKeyPress(ev) {
+  if (ev.code === "Escape") {
+    instance.close();
+    window.removeEventListener("keydown", onEscKeyPress);
+  }
 }
