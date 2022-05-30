@@ -29,6 +29,7 @@ if ("loading" in HTMLImageElement.prototype) {
   images.forEach((img) => {
     img.src = img.dataset.src;
   });
+  console.log(" поддерживает");
 } else {
   const script = document.createElement("script");
   script.src =
@@ -37,6 +38,7 @@ if ("loading" in HTMLImageElement.prototype) {
     "sha512-w/GOi3cTcVd79SBfQyRFwRRM99yHJvshCJdplpNVkE8nlmkWb3VK1kO/+FFQc8YGOAg/7xsWmjL8LVUJMN4lRQ==";
   script.crossOrigin = "anonymous";
   script.referrerPolicy = "no-referrer";
+  console.log("не поддерживает");
 
   document.body.appendChild(script);
 }
